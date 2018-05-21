@@ -1,5 +1,5 @@
 {
-  "document_class": "Demo2",
+  "document_class" : "Demo2",
   "native": {
     "path_ignore": []
   },
