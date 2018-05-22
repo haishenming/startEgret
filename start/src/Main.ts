@@ -34,23 +34,57 @@ class Main extends egret.DisplayObjectContainer {
     }
 
     private onAddToStage(event: egret.Event) {
-        var spr: egret.Sprite = new egret.Sprite();
-        spr.graphics.beginFill(0x00ff00);
-        spr.graphics.drawRect(0, 0, 100, 100);
-        spr.graphics.endFill();
-        this.addChild(spr);
-        spr.x = 150;
-        spr.y = 150;
+        var shp1: egret.Shape = new egret.Shape();
+        shp1.x = 20;
+        shp1.y = 20;
+        shp1.graphics.lineStyle(10, 0x00ff00);
+        shp1.graphics.beginFill(0xff0000, 1);
+        shp1.graphics.drawRect(0, 0, 100, 100);
+        shp1.graphics.endFill();
+        this.addChild(shp1);
 
-        var spr2: egret.Sprite = new egret.Sprite();
-        spr2.graphics.beginFill(0x0000ff);
-        spr2.graphics.drawRect(0, 0, 50, 50);
-        spr2.graphics.endFill();
-        spr2.x = 10;
-        spr2.y = 10;
+        var shp2: egret.Shape = new egret.Shape();
+        shp2.x = 20;
+        shp2.y = 20;
+        shp2.graphics.beginFill(0xff0000, 1);
+        shp2.graphics.drawCircle(200, 200, 200);
+        shp2.graphics.endFill();
+        this.addChild(shp2);
 
-        spr.addChild(spr2)
+        var line1: egret.Shape = new egret.Shape();
+        line1.graphics.lineStyle(2, 0x00ff00);
+        line1.graphics.moveTo(10, 10);
+        line1.graphics.lineTo(200, 200);
+        line1.graphics.lineTo(30, 30);
+        line1.graphics.lineTo(400, 400);
+        line1.graphics.lineTo(50, 50);
+        line1.graphics.endFill();
+        this.addChild(line1);
 
+        var shp3: egret.Shape = this.getSectorProgress();
+        this.addChild(shp3)
+
+    }
+
+    private getSectorProgress():egret.Shape {
+        var shape:egret.Shape = new egret.Shape();
+        var angle:number = 0;
+        egret.startTick(function (timeStamp:number):boolean {
+            angle += 1;
+            changeGraphics(angle);
+            angle = angle % 360;
+            return true;
+        }, this);
+        return shape;
+        function changeGraphics(angle) {
+            shape.graphics.clear();
+            shape.graphics.beginFill(0x2980B9);
+            shape.graphics.moveTo(50, 50);
+            shape.graphics.lineTo(100, 50);
+            shape.graphics.drawArc(50, 50, 50, 0, angle * Math.PI / 180, false);
+            shape.graphics.lineTo(50, 50);
+            shape.graphics.endFill();
+        }
     }
 }
 
